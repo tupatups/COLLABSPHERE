@@ -7,7 +7,6 @@ import ProjectsSidebar from "./components/ProjectSidebar.jsx";
 import SelectedProject from "./components/SelectedProject.jsx";
 import LoginPage from "./components/LoginPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
-import RootLayout from "./components/RootLayout.jsx";
 
 export default function App() {
   const [projectsState, setProjectsState] = useState({

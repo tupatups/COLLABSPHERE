@@ -54,7 +54,7 @@ export default function NewProject({ onAdd, onCancel }) {
           </li>
           <li>
             <button
-              className="px-6 py-2 rounded-md bg-gray-800 text-gray-50 hover:bg-gray-950"
+              className="px-6 py-2 rounded-md bg-teal-700 text-gray-50 hover:bg-teal-800"
               onClick={handleSave}
             >
               Save
