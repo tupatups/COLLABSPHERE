@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import a from "../style/loginStyle.module.css";
+import a from "../style/signUpStyle.module.css";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -23,14 +23,14 @@ export default function LoginPage() {
               <div class={a.formContentContainer}>
                 <p class={a.welcome}>Welcome back!</p>
                 <div class={a.usernameDiv}>
-                  <label>Your username</label>
+                  <label>Username</label>
                   <input placeholder="Username" id="username" type="text" />
                 </div>
                 <div class={a.passwordDiv}>
                   <label>Password</label>
                   <input placeholder="••••••••" id="password" type="password" />
                 </div>
-
+                <button class={a.loginSignUpButton} onClick={handleNavigate}>Login</button>
                 <p class={a.noAccount}>
                   Don't have an account? <Link to="/signup">Sign up</Link>
                 </p>

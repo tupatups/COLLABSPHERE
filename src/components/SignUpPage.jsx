@@ -30,9 +30,9 @@ export default function LoginPage() {
                   <label>Set password</label>
                   <input placeholder="••••••••" id="password" type="password" />
                 </div>
-
+                <button class={a.loginSignUpButton} onClick={handleNavigate}>Create Account</button>
                 <p class={a.noAccount}>
-                  Already have an account? <Link to="/signup">Sign in</Link>
+                  Already have an account? <Link to="/">Sign in</Link>
                 </p>
               </div>
             </div>
