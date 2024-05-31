@@ -125,21 +125,23 @@ export default function App() {
     {
       path: "/dashboard",
       element: (
-        <main className="h-screen my-8 flex gap-8">
-          <ProjectsSidebar
-            onStartAddProject={handleStartAddProject}
-            projects={projectsState.projects}
-            onSelectProject={handleSelectProject}
-            selectedProjectId={projectsState.selectedProjectId}
-          />
-          {content}
-        </main>
+        <>
+          <main className="h-screen flex gap-8">
+            <ProjectsSidebar
+              onStartAddProject={handleStartAddProject}
+              projects={projectsState.projects}
+              onSelectProject={handleSelectProject}
+              selectedProjectId={projectsState.selectedProjectId}
+            />
+            {content}
+          </main>
+        </>
       ),
     },
     {
-      path: '/signup',
-      element: <SignUpPage />
-    }
+      path: "/signup",
+      element: <SignUpPage />,
+    },
   ]);
 
   return (

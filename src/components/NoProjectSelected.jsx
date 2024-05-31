@@ -8,10 +8,10 @@ export default function NoProjectSelected({ onStartAddProject }) {
         alt="An empty task list"
         className="w-16 h-16 object-contain mx-auto"
       />
-      <h2 className="text-xl font-bold text-gray-900 my-4">
+      <h2 className="text-xl font-bold text-gray-100 my-4">
         No Project Selected
       </h2>
-      <p className="text-gray-900 mb-4">
+      <p className="text-gray-100 mb-4">
         Select a project, create a new one, or join using a workspace code.
       </p>
       <p className="mt-8">

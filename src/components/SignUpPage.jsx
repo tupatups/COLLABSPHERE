@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import a from "../style/signUpStyle.module.css";
+import style from "../style/signUpStyle.module.css";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -14,24 +14,24 @@ export default function LoginPage() {
   }
   return (
     <>
-      <div class={a.container}>
-        <h1 class={a.title}>CollabSphere</h1>
-        <p class={a.subTitle}>Navigate the workflow seas with ease!</p>
-        <form class={a.formContainer} onSubmit={handleLogin}>
+      <div class={style.container}>
+        <h1 class={style.title}>CollabSphere</h1>
+        <p class={style.subTitle}>Navigate the workflow seas with ease!</p>
+        <form class={style.formContainer} onSubmit={handleLogin}>
           <div>
             <div>
-              <div class={a.formContentContainer}>
-                <p class={a.welcome}>Welcome!</p>
-                <div class={a.usernameDiv}>
+              <div class={style.formContentContainer}>
+                <p class={style.welcome}>Welcome!</p>
+                <div class={style.usernameDiv}>
                   <label>Enter your username</label>
                   <input placeholder="Username" id="username" type="text" />
                 </div>
-                <div class={a.passwordDiv}>
+                <div class={style.passwordDiv}>
                   <label>Set password</label>
                   <input placeholder="••••••••" id="password" type="password" />
                 </div>
-                <button class={a.loginSignUpButton} onClick={handleNavigate}>Create Account</button>
-                <p class={a.noAccount}>
+                <button class={style.loginSignUpButton} onClick={handleNavigate}>Create Account</button>
+                <p class={style.noAccount}>
                   Already have an account? <Link to="/">Sign in</Link>
                 </p>
               </div>

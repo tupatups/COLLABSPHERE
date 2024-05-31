@@ -1,4 +1,5 @@
 import Button from "./Button";
+import style from '../style/projectSidebar.module.css';
 export default function ProjectSidebar({
   onStartAddProject,
   projects,
@@ -7,13 +8,10 @@ export default function ProjectSidebar({
 }) {
   return (
     <>
-      <aside className="w-1/3 px-8 py-16 shadow-x1 bg-cyan-800 text-gray-50 md:w-72 rounded-r-xl">
-      <h2 className="mb-8 font-bold text-[2.4rem] text-gray-200">
-        CollabSphere
-      </h2>
+      <div class={style.sidebar}>
       <div>
         <Button onClick={onStartAddProject}>+ Add Project</Button>
-        <p className="text-[1.3rem] mt-6 py-4 px-2 font-bold">My Workspaces</p>
+        <p class={style.myWorkspace}>My Workspaces</p>
       </div>
       <ul className="mt-8">
         {projects.map((project) => {
@@ -37,7 +35,7 @@ export default function ProjectSidebar({
         })}
       </ul>
       <div class="rounded-lg bg-gradient-to-tr from-gray-300 to-gray-500 shadow-lg shadow-[#a4a4a4,#ffffff]"></div>
-    </aside>
+    </div>
     </>
   );
 }

@@ -48,13 +48,13 @@ export default function NewProject({ onAdd, onCancel }) {
       <div className="w-[35rem] mt-16 ml-16">
         <menu className="flex items-center justify-end gap-4 my-4">
           <li>
-            <button className="text-gray-800 hover:text-gray-950" onClick={onCancel}>
+            <button className="text-gray-200 hover:text-gray-100" onClick={onCancel}>
               Cancel
             </button>
           </li>
           <li>
             <button
-              className="px-6 py-2 rounded-md bg-teal-700 text-gray-50 hover:bg-teal-800"
+              className="px-6 py-2 rounded-md bg-gray-800 text-gray-100 hover:bg-gray-700"
               onClick={handleSave}
             >
               Save

@@ -1,0 +1,16 @@
+.header {
+    padding: 2rem;
+    background: radial-gradient(#280a48, #20043d);
+
+    
+}
+.titleLogo {
+    color: white;
+    font-size: 2.7rem;
+    font-weight: bold;
+    background: linear-gradient(40deg, #ea00ff, #ea00ff, #03d5ff, #03d5ff);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: 20%;
+}

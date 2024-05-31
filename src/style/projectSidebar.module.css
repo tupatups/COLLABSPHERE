@@ -1,0 +1,19 @@
+.sidebar {
+    background: radial-gradient(#400779, #280b42);
+    padding: 2rem;
+    margin: 0;
+    border-radius: 10px;
+    width: 15%;
+    color: white;
+}
+.appTitle {
+    color: white;
+    font-size: 2.7rem;
+    font-weight: bold;
+    background: linear-gradient(40deg, #ea00ff, #ea00ff, #03d5ff, #03d5ff);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
+    
+}
