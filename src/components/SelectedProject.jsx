@@ -1,7 +1,6 @@
 import GanttChart from "./GanttChart";
 import Tasks from "./Tasks";
-import classes from "../style/ganttChart.module.css";
-import style from '../style/newProject.module.css';
+import style from '../style/selectedProject.module.css';
 
 export default function SelectedProject({
   project,
@@ -36,16 +35,14 @@ export default function SelectedProject({
             <h1 class={style.title}>
               {project.title}
             </h1>
-            <button
-              onClick={onDelete}
-            >
-              Delete
-            </button>
+           <button onClick={onDelete}>
+            Delete
+           </button>
           </div>
-          <p className="mb-4 text-gray-100 my-4">
+          <p class={style.date}>
             {formattedStartDate} - {formattedDueDate}
           </p>
-          <p className="text-gray-100 whitespace-pre-wrap my-4">
+          <p class={style.description}>
             {project.description}
           </p>
         </header>
@@ -57,6 +54,11 @@ export default function SelectedProject({
       </div>
 
       {/* This will be the Gantt chart */}
+
+      <div>
+        
+      </div>
+
     </>
   );
 }

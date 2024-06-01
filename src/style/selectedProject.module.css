@@ -1,0 +1,44 @@
+
+.selectedProjectContainer {
+  background: radial-gradient(#400779, #280b42);
+  width: 500px;
+  word-wrap: break-word;
+  height: 870px;
+  padding: 3rem;
+  border-radius: 10px;
+  margin-top: 3rem;
+  color: white;
+}
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.topContainer button {
+  color: white;
+}
+
+.title {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: rgb(236, 236, 236);
+  padding-bottom: 1rem;
+  width: 300px;
+}
+.description {
+  color: rgb(196, 196, 196);
+  white-space: wrap;
+  font-style: italic;
+  padding: 1rem;
+}
+.deleteButton {
+  background-color: rgba(219, 47, 47, 0.576);
+}
+ .date {
+  font-weight: bold;
+  color: rgb(255, 243, 243);
+ }
+ p {
+  word-wrap: break-word;
+ }
+ 

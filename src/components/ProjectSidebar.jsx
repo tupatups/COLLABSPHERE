@@ -13,22 +13,17 @@ export default function ProjectSidebar({
         <h2 class={style.appTitle}>CollabSphere</h2>
       </div>
       <div>
-        <Button onClick={onStartAddProject}>+ Add Project</Button>
         <p class={style.myWorkspace}>My Workspaces</p>
+        <Button onClick={onStartAddProject}>+ Add Project</Button>
       </div>
-      <ul className="mt-8">
+      <ul className="mt-8 font-bold">
         {projects.map((project) => {
-          let cssClasses =
-            "w-full text-left px-2 py-1 rounded-sm my-1 hover:text-gray-200 bg-gray-800 transition duration-250 ease-in hover:text-xl hover:bg-stone-600 rounded-xl";
-
-          if (project.id === selectedProjectId) {
-            cssClasses += " bg-gray-800 text-stone-100 rounded-xl";
-          } 
+          
 
           return (
             <li key={project.id}>
               <button
-                className={cssClasses}
+                class={style.projectButton}
                 onClick={() => onSelectProject(project.id)}
               >
                 {project.title}

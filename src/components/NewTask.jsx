@@ -18,7 +18,7 @@ export default function NewTask({ onAdd }) {
     <div className="flex items-center gap-4">
       <input
         type="text"
-        className="w-64 px-2 py-1 rounded-lg"
+        className="w-64 px-2 py-1 rounded-lg text-gray-900"
         onChange={handleChange}
         value={enteredTask}
       />
