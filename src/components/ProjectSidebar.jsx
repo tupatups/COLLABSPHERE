@@ -9,6 +9,9 @@ export default function ProjectSidebar({
   return (
     <>
       <div class={style.sidebar}>
+      <div class={style.titleLogo}>
+        <h2 class={style.appTitle}>CollabSphere</h2>
+      </div>
       <div>
         <Button onClick={onStartAddProject}>+ Add Project</Button>
         <p class={style.myWorkspace}>My Workspaces</p>

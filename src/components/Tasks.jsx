@@ -7,7 +7,7 @@ export default function Tasks({ tasks, onAdd, onDelete }) {
       <h2 className="text-2xl font-bold mb-4">Tasks</h2>
       <NewTask onAdd={onAdd} />
       {tasks.length === 0 ? (
-        <p className="text-gray-800 my-4">This project does not have any tasks yet.</p>
+        <p className="text-gray-100 my-4">This project does not have any tasks yet.</p>
       ) : (
         <ul className="p-4 mt-8 rounded-xl bg-stone-100 overflow-y-auto max-h-48">
           {tasks.map((task) => (
