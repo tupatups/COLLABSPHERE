@@ -1,19 +1,35 @@
 .container {
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .gridContainer {
-    display: grid;
-    padding: 100px;
-    width: auto;
-    height: auto;
-    grid-template-columns: repeat(9, 5rem); /* 13 columns */
-    grid-template-rows: repeat(4, 5rem); /* 35 rows */
-    gap: 0.5px; /* Optional: Add gap between cells */
-  }
-  
-  /* Example styling for grid items (optional) */
-  .item {
-    background-color: #eee;
-    border: 1px solid black;
-  }
+  display: grid;
+  grid-template-columns: repeat(7, 5rem); /* 13 columns */
+  grid-template-rows: repeat(4, 5rem); /* 35 rows */
+  gap: 0.5px; /* Optional: Add gap between cells */
+  padding: 70px;
+  width: auto;
+  height: auto;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.item {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.shaded {
+  background-color: #ddd;
+}

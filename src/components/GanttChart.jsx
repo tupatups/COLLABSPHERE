@@ -1,21 +1,28 @@
+import React, { useState } from "react";
 import style from "../style/ganttChart.module.css";
 
-export default function GanttChart() {
-  const numRows = 8;
+export default function GanttChart({ startDate, endDate }) {
+  const numRows = 7;
   const numColumns = 4;
 
   const generateItems = () => {
     const items = [];
-    for (let row = 0; row < numRows; row++) {
-      for (let col = 0; col < numColumns; col++) {
-        items.push(<div key={`${row}-${col}`} className={style.item}></div>);
-      }
+    const daysSpan = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+    const startDay = new Date(startDate).getDate();
+
+    for (let day = 1; day <= 31; day++) {
+      const isShaded = day >= startDay && day <= startDay + daysSpan;
+      items.push(
+        <div key={day} className={`item ${isShaded? 'shaded' : ''}`}>
+          {day}
+        </div>
+      );
     }
     return items;
   };
 
   return (
-    <div class={style.container}>
+    <div className={style.container}>
       <div className={style.gridContainer}>{generateItems()}</div>
     </div>
   );

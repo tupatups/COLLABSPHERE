@@ -69,7 +69,7 @@ export default function App() {
 
   function handleAddProject(projectData) {
     setProjectsState((prevState) => {
-      const projectId = Math.random();
+      const projectId = Math.random(); // palitan ng id galing sa firebase
       const newProject = {
         ...projectData,
         id: projectId,
