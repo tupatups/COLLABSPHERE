@@ -1,0 +1,52 @@
+.container {
+  width: 940px;
+  height: 870px;
+  background: radial-gradient(#400779, #280b42);
+  border-radius: 5px;
+  margin-top: 3rem;
+  padding: 3rem;
+}
+
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.topContainer button {
+  color: white;
+}
+
+.title {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: rgb(236, 236, 236);
+  padding-bottom: 1rem;
+  width: 300px;
+}
+
+.description {
+  color: rgb(196, 196, 196);
+  white-space: wrap;
+  font-style: italic;
+  padding: 1rem;
+}
+.ganttChart {
+    height: 500px;
+    width: 500px;
+    border: 3px solid red;
+    
+}
+
+.deleteButton {
+  background-color: rgba(219, 47, 47, 0.576);
+}
+
+.date {
+  font-weight: bold;
+  color: rgb(255, 243, 243);
+}
+
+p {
+  word-wrap: break-word;
+}

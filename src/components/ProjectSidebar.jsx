@@ -18,8 +18,6 @@ export default function ProjectSidebar({
       </div>
       <ul className="mt-8 font-bold">
         {projects.map((project) => {
-          
-
           return (
             <li key={project.id}>
               <button

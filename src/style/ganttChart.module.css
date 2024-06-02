@@ -1,0 +1,19 @@
+.container {
+
+}
+
+.gridContainer {
+    display: grid;
+    padding: 100px;
+    width: auto;
+    height: auto;
+    grid-template-columns: repeat(9, 5rem); /* 13 columns */
+    grid-template-rows: repeat(4, 5rem); /* 35 rows */
+    gap: 0.5px; /* Optional: Add gap between cells */
+  }
+  
+  /* Example styling for grid items (optional) */
+  .item {
+    background-color: #eee;
+    border: 1px solid black;
+  }
