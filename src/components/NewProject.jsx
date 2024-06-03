@@ -1,6 +1,25 @@
 import { useRef } from "react";
 import Input from "./Input";
 import Modal from "./Modal";
+import app from "../firebase.js"
+import {getFirestore, addDoc, doc, collection} from "firebase/firestore"
+import {getAuth} from "firebase/auth"
+
+const db = getFirestore(app)
+const auth = getAuth(app)
+
+
+const addProject = async (project) => {
+  const user = auth.currentUser;
+  if(user){
+    const projectColRef = collection(db, "users", user.uid, "projects")
+    const projectRef = await addDoc(projectColRef, project)
+    return projectRef.id
+  }
+  else{
+    console.log("No authenticated user")
+  }
+}
 
 export default function NewProject({ onAdd, onCancel }) {
 
@@ -26,12 +45,21 @@ export default function NewProject({ onAdd, onCancel }) {
       return;
     }
 
-    onAdd({
+    const projectData = {
       title: enteredTitle,
       description: enteredDescription,
       startDate: enteredStartDate,
       dueDate: enteredDueDate,
-    });
+    };
+    
+    addProject(projectData)
+      .then((projectId) =>{
+        console.log(`Project id: ${projectId}`)
+        onAdd(projectData)
+      })
+      .catch((error) => {
+        console.log("Error: ", error)
+      })
   }
 
   return (
