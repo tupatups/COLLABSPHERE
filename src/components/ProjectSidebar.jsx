@@ -24,7 +24,7 @@ export default function ProjectSidebar({
                 class={style.projectButton}
                 onClick={() => onSelectProject(project.id)}
               >
-                {project.title}
+                {project.title} 
               </button>
             </li>
           );
