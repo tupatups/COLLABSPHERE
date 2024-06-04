@@ -20,12 +20,14 @@ export default function App() {
 
   //permanently added the projects on sidebar
   const auth = getAuth(app)
+  const user = auth.currentUser;
+  const db = getFirestore(app)
+  const colRef = collection(db, "users", user.uid, "projects")
+        console.log(user.uid)
 
   useEffect(() => {
     const fetchProject = async () => {
-      const db = getFirestore(app)
-      const user = auth.currentUser;
-      const colRef = collection(db, "users", user.uid, "projects")
+      
       const projectSnapshot = await getDocs(colRef)
       const projectList = projectSnapshot.docs.map(doc => ({
         id: doc.id, 
@@ -93,7 +95,7 @@ export default function App() {
 
   function handleAddProject(projectData) {
     const db = getFirestore(app)
-    const colRef = collection(db, "users")
+    const colRef = collection(db, "users", user.uid, "projects")
 
     addDoc(colRef, projectData)
     .then((docRef) => {

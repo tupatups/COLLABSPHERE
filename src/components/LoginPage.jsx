@@ -41,24 +41,24 @@ export default function LoginPage() {
  
   return (
     <>
-      <div class={style.container}>
-        <h1 class={style.title}>CollabSphere</h1>
-        <p class={style.subTitle}>Navigate the workflow seas with ease!</p>
-        <form class={style.formContainer} onSubmit={handleLogin}>
+      <div className={style.container}>
+        <h1 className={style.title}>CollabSphere</h1>
+        <p className={style.subTitle}>Navigate the workflow seas with ease!</p>
+        <form className={style.formContainer} onSubmit={handleLogin}>
           <div>
             <div>
-              <div class={style.formContentContainer}>
-                <p class={style.welcome}>Welcome back!</p>
-                <div class={style.usernameDiv}>
+              <div className={style.formContentContainer}>
+                <p className={style.welcome}>Welcome back!</p>
+                <div className={style.usernameDiv}>
                   <label>Username</label>
                   <input placeholder="Username" id="username" type="text" onChange={handleEmailChange}/>
                 </div>
-                <div class={style.passwordDiv}>
+                <div className={style.passwordDiv}>
                   <label>Password</label>
                   <input placeholder="••••••••" id="password" type="password" onChange={handlePasswordChange}/>
                 </div>
-                <button class={style.loginSignUpButton} onClick={handleLogin}>Login</button>
-                <p class={style.noAccount}>
+                <button className={style.loginSignUpButton} onClick={handleLogin}>Login</button>
+                <p className={style.noAccount}>
                   Don't have an account? <Link to="/signup">Sign up</Link>
                 </p>
               </div>
