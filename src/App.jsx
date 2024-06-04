@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import NewProject from "./components/NewProject.jsx";
@@ -7,6 +7,9 @@ import ProjectsSidebar from "./components/ProjectSidebar.jsx";
 import SelectedProject from "./components/SelectedProject.jsx";
 import LoginPage from "./components/LoginPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
+import app from "./firebase.js"
+import {getFirestore, addDoc, collection, getDocs, getDoc} from "firebase/firestore"
+import { getAuth } from "firebase/auth";
 
 export default function App() {
   const [projectsState, setProjectsState] = useState({
@@ -15,6 +18,47 @@ export default function App() {
     tasks: [],
   });
 
+  //permanently added the projects on sidebar
+  const auth = getAuth(app)
+
+ 
+  const fetchProject = async (user) => {
+    try{  
+    const db = getFirestore(app)
+    const user = auth.currentUser;
+    const colRef = collection(db, "users", user.uid, "projects")
+    const projectSnapshot = await getDocs(colRef)
+    const projectList = projectSnapshot.docs.map(doc => ({
+      id: doc.id, 
+      ...doc.data(),
+    }))
+    setProjectsState(prevState => ({
+      ...prevState,
+      projects: projectList,
+    }))
+  }catch (error) {
+    console.error(error);
+  }
+  useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+          fetchProject(user);
+        } else {
+          console.log('No user is signed in.');
+          // Handle case where no user is signed in, e.g., clear projects state or show a message
+          setProjectsState(prevState => ({
+            ...prevState,
+            projects: [],
+          }));
+        }
+      });
+    
+      // Cleanup subscription on unmount
+      return () => unsubscribe();
+  }, []);
+
+
+  }
   function handleAddTask(text) {
     setProjectsState((prevState) => {
       const taskId = Math.random();
@@ -68,19 +112,28 @@ export default function App() {
   }
 
   function handleAddProject(projectData) {
-    setProjectsState((prevState) => {
-      const projectId = Math.random(); // palitan ng id galing sa firebase
-      const newProject = {
-        ...projectData,
-        id: projectId,
-      };
+    const db = getFirestore(app)
+    const user = auth.currentUser
+    const colRef = collection(db, "users", user.uid, "projects")
 
-      return {
-        ...prevState,
-        selectedProjectId: undefined,
-        projects: [...prevState.projects, newProject],
-      };
-    });
+    addDoc(colRef, projectData)
+    .then((docRef) => {
+      setProjectsState((prevState) => {
+        const newProject = {
+         ...projectData,
+         id: docRef.id,
+        };
+    
+        return {
+          ...prevState,
+          selectedProjectId: undefined,
+          projects: [...prevState.projects, newProject],
+       };
+      });
+    })
+    .catch((error) => {
+      console.log("error", error)
+    })
   }
 
   function handleDeleteProject() {
