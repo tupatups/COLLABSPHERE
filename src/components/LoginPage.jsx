@@ -23,6 +23,7 @@ export default function LoginPage() {
     .then((userCredential) => {
       const user = userCredential
       console.log("Logged in", user)
+      
       navigate("/dashboard");
     })
     .catch((error) => {
