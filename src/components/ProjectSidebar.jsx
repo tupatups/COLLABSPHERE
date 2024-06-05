@@ -8,12 +8,12 @@ export default function ProjectSidebar({
 }) {
   return (
     <>
-      <div class={style.sidebar}>
-      <div class={style.titleLogo}>
-        <h2 class={style.appTitle}>CollabSphere</h2>
+      <div className={style.sidebar}>
+      <div className={style.titleLogo}>
+        <h2 className={style.appTitle}>CollabSphere</h2>
       </div>
       <div>
-        <p class={style.myWorkspace}>My Workspaces</p>
+        <p className={style.myWorkspace}>My Workspaces</p>
         <Button onClick={onStartAddProject}>+ Add Project</Button>
       </div>
       <ul className="mt-8 font-bold">
@@ -21,16 +21,16 @@ export default function ProjectSidebar({
           return (
             <li key={project.id}>
               <button
-                class={style.projectButton}
+                className={style.projectButton}
                 onClick={() => onSelectProject(project.id)}
               >
-                {project.title}
+                {project.title} 
               </button>
             </li>
           );
         })}
       </ul>
-      <div class="rounded-lg bg-gradient-to-tr from-gray-300 to-gray-500 shadow-lg shadow-[#a4a4a4,#ffffff]"></div>
+      <div className="rounded-lg bg-gradient-to-tr from-gray-300 to-gray-500 shadow-lg shadow-[#a4a4a4,#ffffff]"></div>
     </div>
     </>
   );

@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import app from "./firebase.js"
+import {getFirestore, addDoc, collection, getDocs, getDoc} from "firebase/firestore";
+import { authProvider, useAuth } from "./components/AuthChange.jsx";
 
 import NewProject from "./components/NewProject.jsx";
 import NoProjectSelected from "./components/NoProjectSelected.jsx";
@@ -8,12 +11,49 @@ import SelectedProject from "./components/SelectedProject.jsx";
 import LoginPage from "./components/LoginPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 
-export default function App() {
+const AuthProvider = authProvider
+
+function App(){
+  return (
+    <AuthProvider>
+      <AppContent/>
+    </AuthProvider>
+  )
+}
+
+
+function AppContent() {
+  const { user } = useAuth();
   const [projectsState, setProjectsState] = useState({
     selectedProjectId: undefined,
     projects: [],
     tasks: [],
   });
+
+  //permanently added the projects on sidebar
+ 
+  const db = getFirestore(app)
+
+   useEffect(() => {
+    const fetchProject = async () => {
+      if (!user) return;
+
+      const colRef = collection(db, "users", user.uid, "projects")
+      const projectSnapshot = await getDocs(colRef)
+    
+      const projectList = projectSnapshot.docs.map(doc => ({
+        id: doc.id, 
+        ...doc.data(),
+      }))
+      setProjectsState(prevState => ({
+        ...prevState,
+        projects: projectList,
+      }))
+    }
+    if (user) {
+      fetchProject().catch(console.error)
+    }
+   }, [db, user])
 
   function handleAddTask(text) {
     setProjectsState((prevState) => {
@@ -68,19 +108,27 @@ export default function App() {
   }
 
   function handleAddProject(projectData) {
-    setProjectsState((prevState) => {
-      const projectId = Math.random(); // palitan ng id galing sa firebase
-      const newProject = {
-        ...projectData,
-        id: projectId,
-      };
+    const db = getFirestore(app)
+    const colRef = collection(db, "users", user.uid, "projects")
 
-      return {
-        ...prevState,
-        selectedProjectId: undefined,
-        projects: [...prevState.projects, newProject],
-      };
-    });
+    addDoc(colRef, projectData)
+    .then((docRef) => {
+      setProjectsState((prevState) => {
+        const newProject = {
+         ...projectData,
+         id: docRef.id,
+        };
+    
+        return {
+          ...prevState,
+          selectedProjectId: undefined,
+          projects: [...prevState.projects, newProject],
+       };
+      });
+    })
+    .catch((error) => {
+      console.log("error", error)
+    })
   }
 
   function handleDeleteProject() {
@@ -150,3 +198,5 @@ export default function App() {
     </>
   );
 }
+
+export default App;
