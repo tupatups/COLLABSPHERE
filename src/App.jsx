@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import app from "./firebase.js"
+import {getFirestore, addDoc, collection, getDocs, getDoc} from "firebase/firestore";
+import { authProvider, useAuth } from "./components/AuthChange.jsx";
 
 import NewProject from "./components/NewProject.jsx";
 import NoProjectSelected from "./components/NoProjectSelected.jsx";
@@ -7,11 +10,20 @@ import ProjectsSidebar from "./components/ProjectSidebar.jsx";
 import SelectedProject from "./components/SelectedProject.jsx";
 import LoginPage from "./components/LoginPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
-import app from "./firebase.js"
-import {getFirestore, addDoc, collection, getDocs, getDoc} from "firebase/firestore"
-import { getAuth } from "firebase/auth";
 
-export default function App() {
+const AuthProvider = authProvider
+
+function App(){
+  return (
+    <AuthProvider>
+      <AppContent/>
+    </AuthProvider>
+  )
+}
+
+
+function AppContent() {
+  const { user } = useAuth();
   const [projectsState, setProjectsState] = useState({
     selectedProjectId: undefined,
     projects: [],
@@ -19,14 +31,13 @@ export default function App() {
   });
 
   //permanently added the projects on sidebar
-  const auth = getAuth(app)
+ 
   const db = getFirestore(app)
-  const user = auth.currentUser;
-        
 
    useEffect(() => {
     const fetchProject = async () => {
-    
+      if (!user) return;
+
       const colRef = collection(db, "users", user.uid, "projects")
       const projectSnapshot = await getDocs(colRef)
     
@@ -39,8 +50,10 @@ export default function App() {
         projects: projectList,
       }))
     }
-    fetchProject().catch(console.error)
-   }, [])
+    if (user) {
+      fetchProject().catch(console.error)
+    }
+   }, [db, user])
 
   function handleAddTask(text) {
     setProjectsState((prevState) => {
@@ -185,3 +198,5 @@ export default function App() {
     </>
   );
 }
+
+export default App;
