@@ -25,10 +25,12 @@ export default function LoginPage() {
       console.log("Logged in", user)
       
       navigate("/dashboard");
+      
     })
     .catch((error) => {
       console.log("Error: ", error)
     })
+    
   };
 
   function handleEmailChange(event) {
