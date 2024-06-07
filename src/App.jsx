@@ -106,7 +106,7 @@ function AppContent() {
       };
     });
   }
-
+// unnecessary commit
   function handleAddProject(projectData) {
     
     const colRef = collection(db, "users", user.uid, "projects")
