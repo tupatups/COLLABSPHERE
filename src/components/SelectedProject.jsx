@@ -34,7 +34,9 @@ export default function SelectedProject({
         <header class={style.header}>
           <div class={style.topContainer}>
             <h1 class={style.title}>{project.title}</h1>
-            <button onClick={onDelete}>Delete</button>
+
+            {/* Changes, ensure that the onDelete will pass the project id of selected project */}
+            <button onClick={() => onDelete(project)}>Delete</button>
           </div>
           <p class={style.date}>
             {formattedStartDate} - {formattedDueDate}

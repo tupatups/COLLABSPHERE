@@ -131,21 +131,31 @@ function AppContent() {
     })
   }
 
+
+  // deletes the project using deleteDoc 
   function handleDeleteProject(projectData) {
+
+    if(!projectData || !projectData.id){
+      console.log("Invalid project data")
+      return;
+    }
     
-    const docRef = doc(db,"projects")
+    const docRef = doc(db, "users", user.uid, "projects", projectData.id)
     
-    deleteDoc(docRef, projectData)
+    deleteDoc(docRef)
       .then(() => {
          setProjectsState((prevState) => {
           return {
         ...prevState,
         selectedProjectId: undefined,
         projects: prevState.projects.filter(
-          (project) => project.id !== prevState.selectedProjectId),
-      };
+          (project) => project.id !== projectData.id),
+        };
       }) 
-    });
+    })
+    .catch((error) => {
+      console.log("error deleting the project", error);
+    })
   }
 
   const selectedProject = projectsState.projects.find(
