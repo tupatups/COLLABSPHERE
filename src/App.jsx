@@ -132,7 +132,7 @@ function AppContent() {
   }
 
 
-  // deletes the project using deleteDoc 
+  // deletes the project using deleteDoc..
   function handleDeleteProject(projectData) {
 
     if(!projectData || !projectData.id){
