@@ -2,6 +2,7 @@ import GanttChart from "./GanttChart";
 import Tasks from "./Tasks";
 import style from "../style/selectedProject.module.css";
 import style2 from "../style/selectedGanttChart.module.css";
+import NewTask from "./NewTask";
 
 export default function SelectedProject({
   project,
@@ -48,6 +49,7 @@ export default function SelectedProject({
           onDelete={onDeleteTask}
           tasks={tasks.filter((task) => task.projectId === project.id)}
         />
+        <NewTask projectId= {project.id} onAdd={onAddTask}/>
       </div>
 
       {/* This will be the Gantt chart */}

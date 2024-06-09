@@ -55,20 +55,11 @@ function AppContent() {
     }
    }, [db, user])
 
-  function handleAddTask(text) {
-    setProjectsState((prevState) => {
-      const taskId = Math.random();
-      const newTask = {
-        text: text,
-        projectId: prevState.selectedProjectId,
-        id: taskId,
-      };
-
-      return {
-        ...prevState,
-        tasks: [newTask, ...prevState.tasks],
-      };
-    });
+  function handleAddTask(taskData) {
+    setProjectsState((prevState) => ({
+      ...prevState,
+      tasks: [taskData, ...prevState.tasks]
+    }));
   }
 
   function handleDeleteTask(id) {

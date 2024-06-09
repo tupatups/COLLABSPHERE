@@ -1,17 +1,47 @@
 import { useState } from "react";
+import app from "../firebase.js";
+import {getAuth} from "firebase/auth";
+import {getFirestore, addDoc, doc, collection} from "firebase/firestore";
 
-export default function NewTask({ onAdd }) {
+const auth = getAuth(app);
+const db = getFirestore(app); 
+
+const addTask = async (userID, projectID, tasks)=> {
+  try{
+    const taskColRef = collection(db, "users", userID, "projects", projectID, "tasks")
+    const taskDocRef = await addDoc(taskColRef, tasks);
+    return taskDocRef.id;
+  }catch(error){
+    console.error(  );
+  }
+
+
+}
+export default function NewTask({ onAdd, projectID }) {
   const [enteredTask, setEnteredTask] = useState("");
 
   function handleChange(event) {
     setEnteredTask(event.target.value);
   }
-  function handleClick() {
+
+
+  async function handleClick() {
     if (enteredTask.trim() === "") {
       return;
     }
-    onAdd(enteredTask);
-    setEnteredTask("");
+
+    const user = auth.currentUser;
+    if (user) {
+      const taskData = {title: enteredTask, projectId: projectID}
+      const taskId = await addTask(user.uid, projectID, taskData)
+      if(taskId){
+        onAdd({...taskData, id: taskId});
+        setEnteredTask("");
+      }
+    
+    } else{
+      console.log("no authenticated user");
+    }
   }
 
   return (
