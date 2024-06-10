@@ -2,6 +2,7 @@ import GanttChart from "./GanttChart";
 import Tasks from "./Tasks";
 import style from "../style/selectedProject.module.css";
 import style2 from "../style/selectedGanttChart.module.css";
+import NewTask from "./NewTask";
 
 export default function SelectedProject({
   project,
@@ -34,7 +35,9 @@ export default function SelectedProject({
         <header class={style.header}>
           <div class={style.topContainer}>
             <h1 class={style.title}>{project.title}</h1>
-            <button onClick={onDelete}>Delete</button>
+
+            {/* Changes, ensure that the onDelete will pass the project id of selected project */}
+            <button onClick={() => onDelete(project)}>Delete</button>
           </div>
           <p class={style.date}>
             {formattedStartDate} - {formattedDueDate}
@@ -46,6 +49,7 @@ export default function SelectedProject({
           onDelete={onDeleteTask}
           tasks={tasks.filter((task) => task.projectId === project.id)}
         />
+        <NewTask projectId= {project.id} onAdd={onAddTask}/>
       </div>
 
       {/* This will be the Gantt chart */}

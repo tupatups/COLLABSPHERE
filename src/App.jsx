@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import app from "./firebase.js"
-import {getFirestore, addDoc, collection, getDocs, getDoc} from "firebase/firestore";
+import {getFirestore, addDoc, collection, getDocs, doc, deleteDoc} from "firebase/firestore";
 import { authProvider, useAuth } from "./components/AuthChange.jsx";
 
 import NewProject from "./components/NewProject.jsx";
@@ -55,20 +55,11 @@ function AppContent() {
     }
    }, [db, user])
 
-  function handleAddTask(text) {
-    setProjectsState((prevState) => {
-      const taskId = Math.random();
-      const newTask = {
-        text: text,
-        projectId: prevState.selectedProjectId,
-        id: taskId,
-      };
-
-      return {
-        ...prevState,
-        tasks: [newTask, ...prevState.tasks],
-      };
-    });
+  function handleAddTask(taskData) {
+    setProjectsState((prevState) => ({
+      ...prevState,
+      tasks: [taskData, ...prevState.tasks]
+    }));
   }
 
   function handleDeleteTask(id) {
@@ -106,9 +97,9 @@ function AppContent() {
       };
     });
   }
-
+// unnecessary commit
   function handleAddProject(projectData) {
-    const db = getFirestore(app)
+    
     const colRef = collection(db, "users", user.uid, "projects")
 
     addDoc(colRef, projectData)
@@ -131,16 +122,31 @@ function AppContent() {
     })
   }
 
-  function handleDeleteProject() {
-    setProjectsState((prevState) => {
-      return {
+
+  // deletes the project using deleteDoc..
+  function handleDeleteProject(projectData) {
+
+    if(!projectData || !projectData.id){
+      console.log("Invalid project data")
+      return;
+    }
+    
+    const docRef = doc(db, "users", user.uid, "projects", projectData.id)
+    
+    deleteDoc(docRef)
+      .then(() => {
+         setProjectsState((prevState) => {
+          return {
         ...prevState,
         selectedProjectId: undefined,
         projects: prevState.projects.filter(
-          (project) => project.id !== prevState.selectedProjectId
-        ),
-      };
-    });
+          (project) => project.id !== projectData.id),
+        };
+      }) 
+    })
+    .catch((error) => {
+      console.log("error deleting the project", error);
+    })
   }
 
   const selectedProject = projectsState.projects.find(
